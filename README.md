@@ -1,6 +1,6 @@
 # CVNets: A library for training computer vision networks
 
-CVNets is a computer vision toolkit that allows researchers and engineers to train standard and novel mobile- 
+CVNets is a computer vision toolkit that allows researchers and engineers to train standard and novel mobile-
 and non-mobile computer vision models for variety of tasks, including object classification, object detection,
 semantic segmentation, and foundation models (e.g., CLIP).
 
@@ -33,6 +33,25 @@ We recommend to use Python 3.10+ and [PyTorch](https://pytorch.org) (version >= 
 
 Instructions below use Conda, if you don't have Conda installed, you can check out [How to Install Conda](https://docs.conda.io/en/latest/miniconda.html#latest-miniconda-installer-links).
 
+```
+git clone https://github.com/PINTO0309/ml-cvnets.git
+cd ml-cvnets
+
+docker build -t pinto0309/mlcvnets .
+docker run --rm -it --gpus all -v `pwd`:/workdir pinto0309/mlcvnets
+
+pip install -r requirements.txt -c constraints.txt
+# https://github.com/apple/ml-cvnets/issues/94
+pip install --editable .
+
+PYTHONWARNINGS="ignore" cvnets-train \
+--common.config-file config/classification/imagenet/mobilevit_v2_hand_point.yaml \
+--common.results-loc mobilevitv2_results/width_1_0_0 \
+--common.override-kwargs scheduler.cosine.max_lr=0.0049 scheduler.cosine.min_lr=0.00049 optim.weight_decay=0.020 model.classification.mitv2.width_multiplier=1.00
+```
+
+---
+
 ```bash
 # Clone the repo
 git clone git@github.com:apple/ml-cvnets.git
@@ -49,8 +68,8 @@ pip install --editable .
 
 ## Getting started
 
-   * General instructions for working with CVNets are given [here](docs/source/en/general). 
-   * Examples for training and evaluating models are provided [here](docs/source/en/models) and [here](examples). 
+   * General instructions for working with CVNets are given [here](docs/source/en/general).
+   * Examples for training and evaluating models are provided [here](docs/source/en/models) and [here](examples).
    * Examples for converting a PyTorch model to CoreML are provided [here](docs/source/en/general/README-pytorch-to-coreml.md).
 
 ## Supported models and Tasks
@@ -154,19 +173,19 @@ Below is the list of publications from Apple that uses CVNets:
 
 ## Contributing to CVNets
 
-We welcome PRs from the community! You can find information about contributing to CVNets in our [contributing](CONTRIBUTING.md) document. 
+We welcome PRs from the community! You can find information about contributing to CVNets in our [contributing](CONTRIBUTING.md) document.
 
 Please remember to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
 
-For license details, see [LICENSE](LICENSE). 
+For license details, see [LICENSE](LICENSE).
 
 ## Citation
 
 If you find our work useful, please cite the following paper:
 
-``` 
+```
 @inproceedings{mehta2022mobilevit,
      title={MobileViT: Light-weight, General-purpose, and Mobile-friendly Vision Transformer},
      author={Sachin Mehta and Mohammad Rastegari},
@@ -174,12 +193,12 @@ If you find our work useful, please cite the following paper:
      year={2022}
 }
 
-@inproceedings{mehta2022cvnets, 
-     author = {Mehta, Sachin and Abdolhosseini, Farzad and Rastegari, Mohammad}, 
-     title = {CVNets: High Performance Library for Computer Vision}, 
-     year = {2022}, 
-     booktitle = {Proceedings of the 30th ACM International Conference on Multimedia}, 
-     series = {MM '22} 
+@inproceedings{mehta2022cvnets,
+     author = {Mehta, Sachin and Abdolhosseini, Farzad and Rastegari, Mohammad},
+     title = {CVNets: High Performance Library for Computer Vision},
+     year = {2022},
+     booktitle = {Proceedings of the 30th ACM International Conference on Multimedia},
+     series = {MM '22}
 }
 
 ```

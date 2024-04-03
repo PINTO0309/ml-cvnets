@@ -39,6 +39,7 @@ def do_setup(package_data):
         packages=find_packages(exclude=["config_files", "config_files.*"]),
         package_data=package_data,
         test_suite="tests",
+        py_modules=["main_train", "main_eval", "main_conversion", "main_loss_landscape"],
         entry_points={
             "console_scripts": [
                 "cvnets-train = main_train:main_worker",

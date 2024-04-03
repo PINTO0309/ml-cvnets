@@ -31,3 +31,4 @@ cvnets.egg-info/*
 venv/
 
 trash
+hand_point_dataset/
